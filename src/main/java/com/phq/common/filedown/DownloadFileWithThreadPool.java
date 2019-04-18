@@ -7,10 +7,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DownloadFileWithThreadPool {
+	  
+	//声明静态线程池对象
+	 private static ExecutorService threadPool = Executors.newCachedThreadPool();
 	
 	 public void getFileWithThreadPool(String urlLocation, String filePath, int poolLength) throws IOException {
-	        ExecutorService threadPool = Executors.newCachedThreadPool();
-
+	       
 	        long len = getContentLength(urlLocation);
 	        System.out.println(len);
 	        for (int i = 0; i < poolLength; i++) {
@@ -25,7 +27,7 @@ public class DownloadFileWithThreadPool {
 	        }
 	        threadPool.shutdown();
 	    }
-
+        //获取链接的数据内容长度
 	    public static long getContentLength(String urlLocation) throws IOException {
 	        URL url = null;
 	        if (urlLocation != null) {
